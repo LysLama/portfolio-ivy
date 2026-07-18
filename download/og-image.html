@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>OG Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0B1F2A;
+    --ocean-soft: #0E2735;
+    --ocean-line: #14303F;
+    --teal: #2EC4B6;
+    --offwhite: #F5F1EA;
+    --slate: #8FA3AD;
+    --slate-dim: #5E727C;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { background: var(--ocean); }
+  body { font-family: 'Inter', sans-serif; }
+  .og {
+    position: relative;
+    width: 1200px; height: 630px;
+    background: var(--ocean);
+    overflow: hidden;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  /* subtle grid */
+  .og::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(245,241,234,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245,241,234,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+  /* radial glow */
+  .og::after {
+    content: "";
+    position: absolute;
+    top: -100px; right: -80px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle at 30% 30%, rgba(46,196,182,0.22), rgba(46,196,182,0.05) 45%, transparent 70%);
+    pointer-events: none;
+  }
+  /* top meta */
+  .top {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--slate);
+  }
+  .top .brand {
+    display: flex; align-items: center; gap: 14px;
+    color: var(--offwhite);
+  }
+  .top .brand .mono {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--teal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    color: var(--teal);
+  }
+  .top .brand .label {
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+  }
+  .top .role {
+    color: var(--teal);
+    font-size: 13px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .top .role .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 12px var(--teal);
+  }
+
+  /* middle — huge name */
+  .mid {
+    position: relative;
+  }
+  .mid .eyebrow {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--teal);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .mid .eyebrow .line {
+    width: 48px; height: 1px; background: var(--teal);
+  }
+  .mid h1 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 118px;
+    line-height: 0.9;
+    letter-spacing: -0.015em;
+    color: var(--offwhite);
+    margin: 0;
+  }
+  .mid h1 .accent { color: var(--teal); }
+  .mid .sig-row {
+    display: flex; align-items: center; gap: 18px;
+    margin-top: 14px;
+  }
+  .mid .sig {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 42px;
+    color: var(--teal);
+    transform: rotate(-4deg);
+    display: inline-block;
+  }
+  .mid .sig-line {
+    flex: 1; height: 1px; background: var(--ocean-line);
+  }
+  .mid .sig-tag {
+    font-family: 'Inter', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--slate-dim);
+  }
+
+  /* bottom — quote + meta */
+  .bot {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .bot .quote {
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--offwhite);
+    font-style: italic;
+  }
+  .bot .quote .hl {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 500;
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 1px;
+  }
+  .bot .meta {
+    text-align: right;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--slate-dim);
+    line-height: 1.9;
+  }
+  .bot .meta .email { color: var(--offwhite); }
+  .bot .meta .teal { color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="og">
+
+  <div class="top">
+    <div class="brand">
+      <div class="mono">V</div>
+      <div class="label">Vy Nguyen</div>
+    </div>
+    <div class="role">
+      <span class="dot"></span>
+      Junior Strategic Planner · Portfolio 2025
+    </div>
+  </div>
+
+  <div class="mid">
+    <div class="eyebrow"><span class="line"></span> Portfolio — Edition 01</div>
+    <h1>NGUYỄN NGỌC<br><span class="accent">TƯỜNG VY</span></h1>
+    <div class="sig-row">
+      <span class="sig">Vy Nguyen</span>
+      <span class="sig-line"></span>
+      <span class="sig-tag">/ signature</span>
+    </div>
+  </div>
+
+  <div class="bot">
+    <div class="quote">
+      &ldquo;Mình tin một ý tưởng chỉ thuyết phục khi nó đứng trên một <span class="hl">sự thật được đọc đúng</span> — và data là cách mình đi tìm sự thật đó.&rdquo;
+    </div>
+    <div class="meta">
+      <div class="email">tuong.vy11022004@gmail.com</div>
+      <div>0943 451 104</div>
+      <div class="teal">TP. Hồ Chí Minh · 10.7°N 106.6°E</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

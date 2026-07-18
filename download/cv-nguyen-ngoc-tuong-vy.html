@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>CV — Nguyễn Ngọc Tường Vy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0B1F2A;
+    --ocean-soft: #0E2735;
+    --ocean-line: #14303F;
+    --teal: #2EC4B6;
+    --teal-bright: #4FD1C5;
+    --offwhite: #F5F1EA;
+    --slate: #8FA3AD;
+    --slate-dim: #5E727C;
+  }
+  @page { size: 794px 1123px; margin: 0; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--ocean);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--offwhite);
+    -webkit-font-smoothing: antialiased;
+  }
+  .poster {
+    position: relative;
+    width: 794px;
+    min-height: 1123px;
+    background: var(--ocean);
+    overflow: hidden;
+    padding: 48px 52px 44px;
+    box-sizing: border-box;
+  }
+  /* subtle grid */
+  .poster::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(245,241,234,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245,241,234,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+  /* radial teal glow top-right (kept within bounds) */
+  .poster::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle at 80% 20%, rgba(46,196,182,0.16), rgba(46,196,182,0.04) 45%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ---------- HEADER ---------- */
+  .header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--ocean-line);
+    padding-bottom: 22px;
+    margin-bottom: 26px;
+  }
+  .brand-mark {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .monogram {
+    width: 52px; height: 52px;
+    border: 1.5px solid var(--teal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    color: var(--teal);
+    position: relative;
+  }
+  .monogram::after {
+    content: "";
+    position: absolute; inset: 3px;
+    border: 1px solid rgba(46,196,182,0.3);
+    border-radius: 50%;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .brand-text .name-vi {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--offwhite);
+  }
+  .brand-text .name-en {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--teal);
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .header-meta {
+    text-align: right;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+  .header-meta .role {
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .header-meta a {
+    color: var(--offwhite);
+    text-decoration: none;
+  }
+
+  /* ---------- TAGLINE ---------- */
+  .tagline {
+    position: relative;
+    margin-bottom: 28px;
+    padding: 18px 22px;
+    border: 1px solid rgba(46,196,182,0.35);
+    border-radius: 4px;
+    background: rgba(46,196,182,0.05);
+  }
+  .tagline .quote {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--offwhite);
+    font-style: italic;
+  }
+  .tagline .quote strong {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .tagline .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  /* ---------- BODY GRID ---------- */
+  .body {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 30px;
+  }
+  .col h2 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    color: var(--offwhite);
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ocean-line);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .col h2 .num {
+    color: var(--teal);
+    font-size: 11px;
+  }
+  .col h2 .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ocean-line);
+    margin-left: 6px;
+  }
+  .col h2:not(:first-child) {
+    margin-top: 22px;
+  }
+
+  /* Experience */
+  .exp {
+    margin-bottom: 14px;
+    padding-left: 16px;
+    position: relative;
+    border-left: 1px solid var(--ocean-line);
+  }
+  .exp::before {
+    content: "";
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 3px var(--ocean);
+  }
+  .exp .when {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--slate-dim);
+    margin-bottom: 3px;
+  }
+  .exp .title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--offwhite);
+    margin-bottom: 2px;
+  }
+  .exp .org {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--teal);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .exp ul {
+    margin: 0; padding-left: 14px;
+    color: var(--slate);
+    font-size: 10px;
+    line-height: 1.55;
+  }
+  .exp ul li { margin-bottom: 2px; }
+  .exp ul li strong { color: var(--offwhite); font-weight: 500; }
+
+  /* Skills — two-column chips */
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .skill {
+    border: 1px solid var(--ocean-line);
+    border-radius: 3px;
+    padding: 7px 9px;
+    background: var(--ocean-soft);
+  }
+  .skill .k {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--slate-dim);
+    margin-bottom: 2px;
+  }
+  .skill .v {
+    font-size: 10px;
+    color: var(--offwhite);
+    font-weight: 500;
+  }
+  .skill.accent {
+    border-color: rgba(46,196,182,0.4);
+    background: rgba(46,196,182,0.06);
+  }
+
+  /* Education + certs */
+  .edu {
+    border: 1px solid var(--ocean-line);
+    border-radius: 4px;
+    padding: 12px 14px;
+    background: var(--ocean-soft);
+    margin-bottom: 10px;
+  }
+  .edu .school {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--offwhite);
+    letter-spacing: 0.04em;
+  }
+  .edu .deg {
+    font-size: 10px;
+    color: var(--teal);
+    margin: 3px 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .edu .note {
+    font-size: 9.5px;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  /* Goal box */
+  .goal {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid rgba(46,196,182,0.35);
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(46,196,182,0.08), transparent);
+  }
+  .goal .label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .goal .text {
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--offwhite);
+    font-style: italic;
+  }
+  .goal .text strong {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* metrics row */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--ocean-line);
+    border: 1px solid var(--ocean-line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 14px;
+  }
+  .metric {
+    background: var(--ocean-soft);
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .metric .v {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .metric .k {
+    font-size: 7.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--slate);
+    margin-top: 4px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer {
+    position: relative;
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ocean-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--slate-dim);
+  }
+  .footer .sig {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--teal);
+    text-transform: none;
+    letter-spacing: 0;
+    transform: rotate(-4deg);
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand-mark">
+      <div class="monogram">V</div>
+      <div class="brand-text">
+        <div class="name-vi">Nguyễn Ngọc Tường Vy</div>
+        <span class="name-en">Vy Nguyen</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="role">Junior Strategic Planner</div>
+      <div>tuong.vy11022004@gmail.com</div>
+      <div>0943 451 104 · TP. Hồ Chí Minh</div>
+      <div>Portfolio Edition 01 / 2025</div>
+    </div>
+  </header>
+
+  <!-- TAGLINE -->
+  <div class="tagline">
+    <div class="label">— Quan điểm</div>
+    <div class="quote">
+      &ldquo;Mình tin một ý tưởng chỉ thuyết phục khi nó đứng trên một <strong>sự thật được đọc đúng</strong> — và data là cách mình đi tìm sự thật đó.&rdquo;
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- LEFT COLUMN -->
+    <div class="col">
+      <h2><span class="num">01</span> Kinh nghiệm <span class="line"></span></h2>
+
+      <div class="exp">
+        <div class="when">2025 · FPT Online</div>
+        <div class="title">Planning Intern</div>
+        <div class="org">Strategic Planning</div>
+        <ul>
+          <li><strong>Lynk &amp; Co 08 EM-P × Car Awards 2025</strong> — xây proposal mời nhãn hàng đồng hành (~1 tỷ VND, deadline 4 ngày). Đề xuất xoay quanh chữ &ldquo;bảo chứng&rdquo;: Car Test, Car Insights vodcast, Driving Day. Dùng số liệu GA chuyên mục Xe VnExpress (24,7M users, 67,6% nam) chứng minh tệp. <strong>Được pitch trực tiếp với nhãn hàng.</strong></li>
+          <li><strong>Toshiba × Tech Awards 2025</strong> — đề xuất đặt máy lọc nước vào nhóm Sức khỏe và máy rửa chén vào nhóm Tổ ấm của &ldquo;Sản phẩm tôi yêu 2025&rdquo;, biến sản phẩm thành đề cử vinh danh thay vì quảng cáo.</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="when">2025 · Môn Khởi nghiệp</div>
+        <div class="title">Marketing &amp; Sales — InBlue</div>
+        <div class="org">Nền tảng luyện phỏng vấn cùng AI</div>
+        <ul>
+          <li>Nghiên cứu thị trường, hành vi người dùng, đối thủ; chạy A/B testing với <strong>40 người dùng</strong>.</li>
+          <li>Đọc 60% phản hồi tiêu cực như dữ liệu: sửa giao diện, đóng gói giá, định vị lại giá trị mentor thật.</li>
+          <li>Sau 1 tháng điều chỉnh: <strong>19 khách hàng trả phí đầu tiên</strong> — 19 lần thị trường xác nhận khoảng trống.</li>
+        </ul>
+      </div>
+
+      <h2><span class="num">02</span> Mục tiêu <span class="line"></span></h2>
+      <div class="goal">
+        <div class="label">— Hướng đi tiếp theo</div>
+        <div class="text">
+          Theo đuổi <strong>Business Analytics</strong> để trở thành planner mà mỗi đề xuất đều có <strong>một tầng dữ liệu vững bên dưới</strong>, và mỗi chiến dịch kết thúc đều để lại bài học đo được. Khi cả phòng họp tranh luận bằng cảm giác, mình mở dữ liệu ra và chỉ vào nơi câu trả lời đang nằm.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col">
+      <h2><span class="num">03</span> Học vấn <span class="line"></span></h2>
+
+      <div class="edu">
+        <div class="school">FPT University</div>
+        <div class="deg">Digital Marketing — Sinh viên năm cuối</div>
+        <div class="note">Kỳ thực tập Planning Intern tại FPT Online (2025). Ba dự án thực tế: 2 proposal thương hiệu + 1 startup đến 19 khách trả phí.</div>
+      </div>
+      <div class="edu">
+        <div class="school">Google Data Analytics</div>
+        <div class="deg">Chứng chỉ — nền tảng dữ liệu</div>
+        <div class="note">Đang hệ thống hoá để tự truy vấn dữ liệu thay vì phụ thuộc báo cáo có sẵn.</div>
+      </div>
+
+      <h2><span class="num">04</span> Kỹ năng <span class="line"></span></h2>
+      <div class="skills">
+        <div class="skill accent"><div class="k">Planning</div><div class="v">Strategic Planning</div></div>
+        <div class="skill accent"><div class="k">Research</div><div class="v">Audience &amp; Brief</div></div>
+        <div class="skill"><div class="k">Proposal</div><div class="v">Build &amp; Pitch</div></div>
+        <div class="skill"><div class="k">Timelines</div><div class="v">Roadmap Logic</div></div>
+        <div class="skill"><div class="k">Analytics</div><div class="v">GA · Excel</div></div>
+        <div class="skill"><div class="k">Đang học</div><div class="v">SQL · GA4 · Looker</div></div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><div class="v">3</div><div class="k">Dự án</div></div>
+        <div class="metric"><div class="v">2</div><div class="k">Pitch nhãn hàng</div></div>
+        <div class="metric"><div class="v">19</div><div class="k">Khách trả phí</div></div>
+      </div>
+
+      <h2><span class="num">05</span> Thở ngoài <span class="line"></span></h2>
+      <div class="goal" style="margin-top:0">
+        <div class="label">— Ngoài giờ làm việc</div>
+        <div class="text">
+          Mình thuộc về <strong>biển</strong> — những hòn đảo, những chuyến trekking dài. Trekking và planning giống nhau ở một điểm: muốn đến đích thì phải <strong>đọc đúng bản đồ trước khi bước đi.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2025 · Vy Nguyen · Portfolio Edition 01</span>
+    <span class="sig">Vy Nguyen</span>
+    <span>10.7°N · 106.6°E</span>
+  </footer>
+
+</div>
+</body>
+</html>
