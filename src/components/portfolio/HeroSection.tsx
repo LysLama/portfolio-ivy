@@ -58,21 +58,24 @@ export function HeroSection() {
         <motion.div
           className="absolute -left-20 top-1/4 h-72 w-72 rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(46,196,182,0.12), transparent 70%)" }}
+            background: "radial-gradient(circle, rgba(46,196,182,0.12), transparent 70%)",
+            willChange: reduce ? undefined : "transform" }}
           animate={reduce ? undefined : { x: [0, 40, 0], y: [0, -30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute right-10 top-1/3 h-96 w-96 rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(79,209,197,0.08), transparent 70%)" }}
+            background: "radial-gradient(circle, rgba(79,209,197,0.08), transparent 70%)",
+            willChange: reduce ? undefined : "transform" }}
           animate={reduce ? undefined : { x: [0, -50, 0], y: [0, 40, 0] }}
           transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
         <motion.div
           className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(46,196,182,0.06), transparent 70%)" }}
+            background: "radial-gradient(circle, rgba(46,196,182,0.06), transparent 70%)",
+            willChange: reduce ? undefined : "transform" }}
           animate={reduce ? undefined : { x: [0, 30, 0], y: [0, -20, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />

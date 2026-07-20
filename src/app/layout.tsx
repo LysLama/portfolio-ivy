@@ -12,7 +12,7 @@ const anton = Anton({
 
 const caveat = Caveat({
   variable: "--font-caveat",
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });

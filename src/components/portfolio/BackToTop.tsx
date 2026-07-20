@@ -35,7 +35,7 @@ export function BackToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 12 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="group fixed bottom-6 left-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-teal/40 bg-ocean-soft/80 text-teal backdrop-blur-md transition-all duration-300 hover:border-teal hover:bg-teal hover:text-ocean sm:bottom-8 sm:left-8"
+          className="group fixed bottom-6 left-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-teal/40 bg-ocean-soft text-teal transition-all duration-300 hover:border-teal hover:bg-teal hover:text-ocean sm:bottom-8 sm:left-8"
         >
           <ArrowUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
           {/* progress ring (decorative) */}

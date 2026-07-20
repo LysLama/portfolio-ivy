@@ -106,7 +106,7 @@ export function ContactSection() {
                 <a
                   href="/cv-nguyen-ngoc-tuong-vy.pdf"
                   download="CV-Nguyen-Ngoc-Tuong-Vy.pdf"
-                  className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-teal/50 bg-ocean-soft/60 px-7 py-4 text-sm font-medium uppercase tracking-[0.16em] text-offwhite backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-teal hover:bg-teal/10 hover:shadow-[0_8px_30px_-8px_rgba(46,196,182,0.3)]"
+                  className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-teal/50 bg-ocean-soft px-7 py-4 text-sm font-medium uppercase tracking-[0.16em] text-offwhite transition-all duration-300 hover:-translate-y-0.5 hover:border-teal hover:bg-teal/10 hover:shadow-[0_8px_30px_-8px_rgba(46,196,182,0.3)]"
                 >
                   <Download className="h-4 w-4 text-teal transition-transform duration-300 group-hover:translate-y-0.5 group-hover:scale-110" />
                   Tải CV (PDF)
