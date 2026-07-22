@@ -45,6 +45,7 @@ export function VideoText({
   const reduce = useReducedMotionClient();
   const textRef = useRef<HTMLSpanElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [mask, setMask] = useState<{ url: string; w: number; h: number } | null>(null);
   const [videoFailed, setVideoFailed] = useState(false);
 
@@ -63,13 +64,31 @@ export function VideoText({
       const fs = parseFloat(cs.fontSize);
       const ls = parseFloat(cs.letterSpacing) || 0;
       const lh = parseFloat(cs.lineHeight) || fs;
-      // Baseline within each line box = half-leading + font ascent (~0.8em for
-      // Anton). Keeps the mask glyphs aligned to the real text as spacing changes.
-      const halfLeading = (lh - fs) / 2;
+      const weight = cs.fontWeight || "400";
+
+      // Measure the REAL font metrics (same family the base text renders with)
+      // so the SVG baseline matches CSS exactly — no ascent guessing.
+      let ascent = fs * 0.8;
+      let contentH = fs;
+      const canvas = (canvasRef.current ??= document.createElement("canvas"));
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.font = `${weight} ${fs}px ${cs.fontFamily}`;
+        const m = ctx.measureText("NGỌCƯỜ");
+        const a = m.fontBoundingBoxAscent ?? m.actualBoundingBoxAscent;
+        const d = m.fontBoundingBoxDescent ?? m.actualBoundingBoxDescent;
+        if (a && d) {
+          ascent = a;
+          contentH = a + d;
+        }
+      }
+      // CSS places the baseline at half-leading + ascent from the line-box top.
+      const baseFromTop = (lh - contentH) / 2 + ascent;
+
       const texts = lineEls
         .map((line) => {
           const x = line.offsetLeft;
-          const y = line.offsetTop + halfLeading + fs * 0.8;
+          const y = line.offsetTop + baseFromTop;
           return `<text x="${x}" y="${y}">${escapeXml(line.textContent ?? "")}</text>`;
         })
         .join("");
