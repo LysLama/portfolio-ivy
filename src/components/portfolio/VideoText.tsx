@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotionClient } from "./useClientHooks";
-import { ANTON_MASK_FONT_CSS } from "@/lib/anton-mask-font";
+import { OSWALD_MASK_FONT_CSS } from "@/lib/oswald-mask-font";
 
 type VideoTextProps = {
   /** Text lines, rendered stacked and left-aligned (e.g. ["NGUYỄN NGỌC", "TƯỜNG VY"]). */
@@ -95,8 +95,8 @@ export function VideoText({
 
       const svg =
         `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">` +
-        `<style>${ANTON_MASK_FONT_CSS}</style>` +
-        `<g fill="#fff" font-family="AntonMask, sans-serif" font-weight="400" font-size="${fs}" letter-spacing="${ls}">` +
+        `<style>${OSWALD_MASK_FONT_CSS}</style>` +
+        `<g fill="#fff" font-family="OswaldMask, sans-serif" font-weight="${weight}" font-size="${fs}" letter-spacing="${ls}">` +
         texts +
         `</g></svg>`;
 
@@ -146,9 +146,14 @@ export function VideoText({
         ref={textRef}
         style={{
           display: "block",
-          fontFamily: "var(--font-anton)",
+          fontFamily: "var(--font-oswald)",
+          fontWeight: 300,
           fontSize,
           lineHeight: 1.1,
+          // Headroom so stacked Vietnamese diacritics (e.g. Ễ) stay inside the
+          // video/mask box and get filled instead of poking above it.
+          paddingTop: "0.2em",
+          paddingBottom: "0.05em",
           whiteSpace: "nowrap",
           color: fallbackColor,
         }}

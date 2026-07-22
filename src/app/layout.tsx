@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Caveat, Dancing_Script, Inter } from "next/font/google";
+import { Anton, Caveat, Dancing_Script, Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -7,6 +7,13 @@ const anton = Anton({
   variable: "--font-anton",
   subsets: ["latin", "vietnamese"],
   weight: "400",
+  display: "swap",
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin", "vietnamese"],
+  weight: ["300", "400"],
   display: "swap",
 });
 
@@ -85,7 +92,7 @@ export default function RootLayout({
       <head suppressHydrationWarning />
       <body
         suppressHydrationWarning
-        className={`${anton.variable} ${caveat.variable} ${dancingScript.variable} ${inter.variable} antialiased bg-ocean text-offwhite font-sans selection:bg-teal selection:text-ocean`}
+        className={`${anton.variable} ${oswald.variable} ${caveat.variable} ${dancingScript.variable} ${inter.variable} antialiased bg-ocean text-offwhite font-sans selection:bg-teal selection:text-ocean`}
       >
         {children}
         <Toaster />
