@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Sparkles, Compass, BarChart3, Target, Lightbulb, Anchor } from "lucide-react";
 
 type Word = {
@@ -21,9 +22,88 @@ const WORDS: Word[] = [
 ];
 
 export function Marquee() {
-  const [paused, setPaused] = useState(false);
-  // Duplicate the list so the loop is seamless (translateX -50%)
-  const loop = [...WORDS, ...WORDS];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  // Exposed by the GSAP setup so React hover handlers can pause/resume.
+  const controlRef = useRef<{ pause: () => void; resume: () => void } | null>(null);
+
+  // 4 copies so the track is always ≥ 2× viewport; translating xPercent -50
+  // (i.e. exactly 2 copies) lands on a content boundary → seamless loop.
+  const loop = [...WORDS, ...WORDS, ...WORDS, ...WORDS];
+
+  useGSAP(
+    () => {
+      const track = trackRef.current;
+      if (!track) return;
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const paused = { on: false };
+        const state = { ts: 1 }; // signed timeScale — baseline +1 drifts left
+
+        const loopTween = gsap.to(track, {
+          xPercent: -50,
+          duration: 40,
+          ease: "none",
+          repeat: -1,
+        });
+
+        const applyTS = () => {
+          if (!paused.on) loopTween.timeScale(state.ts);
+        };
+
+        let settle: gsap.core.Tween | undefined;
+        const st = ScrollTrigger.create({
+          trigger: containerRef.current,
+          onUpdate: (self) => {
+            if (paused.on) return;
+            // Signed boost: scroll down → faster left; scroll up → reverse right.
+            const boost = gsap.utils.clamp(-7, 7, self.getVelocity() / 300);
+            state.ts = 1 + boost;
+            applyTS();
+            settle?.kill();
+            settle = gsap.to(state, { ts: 1, duration: 1, ease: "power2.out", onUpdate: applyTS });
+          },
+        });
+
+        controlRef.current = {
+          pause: () => {
+            paused.on = true;
+            gsap.to(loopTween, { timeScale: 0, duration: 0.4, overwrite: true });
+          },
+          resume: () => {
+            paused.on = false;
+            gsap.to(loopTween, { timeScale: state.ts, duration: 0.4, overwrite: true });
+          },
+        };
+
+        return () => {
+          settle?.kill();
+          st.kill();
+          controlRef.current = null;
+        };
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        const loopTween = gsap.to(track, {
+          xPercent: -50,
+          duration: 70,
+          ease: "none",
+          repeat: -1,
+        });
+        controlRef.current = {
+          pause: () => gsap.to(loopTween, { timeScale: 0, duration: 0.4, overwrite: true }),
+          resume: () => gsap.to(loopTween, { timeScale: 1, duration: 0.4, overwrite: true }),
+        };
+        return () => {
+          controlRef.current = null;
+        };
+      });
+
+      return () => mm.revert();
+    },
+    { scope: containerRef }
+  );
 
   const renderWord = (w: Word, key: string) => {
     const Icon = w.icon;
@@ -57,33 +137,22 @@ export function Marquee() {
 
   return (
     <div
+      ref={containerRef}
       aria-hidden
       className="group relative flex overflow-hidden border-y border-ocean-line bg-ocean-soft py-7"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => controlRef.current?.pause()}
+      onMouseLeave={() => controlRef.current?.resume()}
     >
       {/* gradient fade edges */}
       <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-ocean-soft to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-ocean-soft to-transparent" />
 
-      {/* Row 1 — scrolls left */}
+      {/* Single GSAP-driven track */}
       <div
-        className="flex shrink-0 items-center gap-12 whitespace-nowrap pr-12"
-        style={{
-          animation: "marquee 36s linear infinite",
-          animationPlayState: paused ? "paused" : "running",
-        }}
+        ref={trackRef}
+        className="flex shrink-0 items-center gap-12 whitespace-nowrap pr-12 will-change-transform"
       >
-        {loop.map((w, i) => renderWord(w, `r1-${i}`))}
-      </div>
-      <div
-        className="flex shrink-0 items-center gap-12 whitespace-nowrap pr-12"
-        style={{
-          animation: "marquee 36s linear infinite",
-          animationPlayState: paused ? "paused" : "running",
-        }}
-      >
-        {loop.map((w, i) => renderWord(w, `r1b-${i}`))}
+        {loop.map((w, i) => renderWord(w, `m-${i}`))}
       </div>
 
       {/* small label top-left */}
