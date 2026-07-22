@@ -77,3 +77,6 @@ Caddyfile
 /scratchpad/
 /tmp/
 *.tmp
+
+
+AGENT.md
