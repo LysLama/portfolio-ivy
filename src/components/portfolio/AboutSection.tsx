@@ -6,6 +6,7 @@ import { useReducedMotionClient } from "./useClientHooks";
 import { Compass, Waves, Map, GraduationCap, Briefcase, BookOpen, Calendar } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { AnimatedCounter } from "./AnimatedCounter";
+import { AccentLine } from "./AccentLine";
 
 const FACTS = [
   { k: "Đại học", v: "FPT University", icon: GraduationCap },
@@ -182,7 +183,7 @@ export function AboutSection() {
               <div className="my-8">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="eyebrow text-teal">— Năng lực</span>
-                  <span className="h-px flex-1 bg-ocean-line" />
+                  <AccentLine className="flex-1" />
                 </div>
                 <div className="space-y-4">
                   {SKILLS.map((group) => (
@@ -210,7 +211,7 @@ export function AboutSection() {
               <div className="my-8 rounded-md border border-ocean-line bg-ocean-soft/50 p-5">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="eyebrow text-teal">— Mức độ</span>
-                  <span className="h-px flex-1 bg-ocean-line" />
+                  <AccentLine className="flex-1" />
                 </div>
                 <div className="space-y-3">
                   {SKILL_LEVELS.map((s) => (
@@ -257,7 +258,7 @@ export function AboutSection() {
                       <span className="h-2 w-2 animate-pulse rounded-full bg-teal" />
                     </span>
                     <span className="eyebrow text-teal">— Ngoài giờ</span>
-                    <span className="ml-auto h-px flex-1 bg-teal/20" />
+                    <AccentLine className="ml-auto flex-1" color="bg-teal/20" />
                   </div>
                   <p className="text-lg italic leading-relaxed text-offwhite sm:text-xl">
                     Ngoài giờ làm việc, mình thuộc về biển — những hòn đảo, những

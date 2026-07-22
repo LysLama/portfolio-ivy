@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Download, ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { AccentLine } from "./AccentLine";
 import { Magnetic } from "./CursorGlow";
 
 const CONTACTS = [
@@ -47,7 +48,7 @@ export function ContactSection() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         {/* Eyebrow */}
         <Reveal className="mb-8 flex items-center gap-4">
-          <span className="h-px w-12 bg-teal" />
+          <AccentLine className="w-12" color="bg-teal" />
           <span className="eyebrow text-teal">Phần 05 — Liên hệ</span>
         </Reveal>
 

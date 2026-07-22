@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useReducedMotionClient } from "./useClientHooks";
 import { Database, Brain, BarChart3, Target } from "lucide-react";
 import { Reveal, RevealStagger, RevealItem } from "./Reveal";
+import { AccentLine } from "./AccentLine";
 
 const LIMITS = [
   {
@@ -151,7 +152,7 @@ export function HeadingSection() {
                     <span className="h-2 w-2 animate-pulse rounded-full bg-teal" />
                   </span>
                   <p className="eyebrow text-teal">Câu trả lời</p>
-                  <span className="ml-auto h-px flex-1 bg-teal/20" />
+                  <AccentLine className="ml-auto flex-1" color="bg-teal/20" />
                 </div>
                 <p className="text-xl leading-relaxed text-offwhite sm:text-2xl">
                   Business Analytics với mình là câu trả lời cho đúng ba giới hạn
