@@ -77,8 +77,8 @@ export function AboutSection() {
           <Reveal className="lg:col-span-5" y={36}>
             <div className="img-zoom vignette relative aspect-[4/5] overflow-hidden rounded-md border border-ocean-line">
               <motion.img
-                src="/images/trekking-island.png"
-                alt="Một trekker đi dọc bờ biển đảo — biểu tượng cho sở thích trekking và biển của Vy"
+                src="/images/me.jpg"
+                alt="Chân dung Nguyễn Ngọc Tường Vy"
                 className="h-[110%] w-full object-cover"
                 style={{ y: photoY, scale: photoScale }}
               />
