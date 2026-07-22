@@ -132,8 +132,6 @@ export function HeroSection() {
               className="hero-name-video align-top"
               lines={["NGUYỄN NGỌC", "TƯỜNG VY"]}
               mp4Src="/videos/hero-name.mp4"
-              webmSrc="/videos/hero-name.webm"
-              poster="/videos/hero-name-poster.jpg"
               fontSize="clamp(2rem, 10vw, 8rem)"
               fallbackColor="var(--color-offwhite)"
             />

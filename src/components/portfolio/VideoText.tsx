@@ -44,6 +44,7 @@ export function VideoText({
 }: VideoTextProps) {
   const reduce = useReducedMotionClient();
   const textRef = useRef<HTMLSpanElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [mask, setMask] = useState<{ url: string; w: number; h: number } | null>(null);
   const [videoFailed, setVideoFailed] = useState(false);
 
@@ -58,14 +59,17 @@ export function VideoText({
       const h = el.offsetHeight;
       if (w === 0 || h === 0) return;
 
-      const fs = parseFloat(getComputedStyle(lineEls[0]).fontSize);
-      const ls = parseFloat(getComputedStyle(lineEls[0]).letterSpacing) || 0;
-      // Approx cap/ascent so the baseline sits correctly inside each line box.
-      const ascent = fs * 0.8;
+      const cs = getComputedStyle(lineEls[0]);
+      const fs = parseFloat(cs.fontSize);
+      const ls = parseFloat(cs.letterSpacing) || 0;
+      const lh = parseFloat(cs.lineHeight) || fs;
+      // Baseline within each line box = half-leading + font ascent (~0.8em for
+      // Anton). Keeps the mask glyphs aligned to the real text as spacing changes.
+      const halfLeading = (lh - fs) / 2;
       const texts = lineEls
         .map((line) => {
           const x = line.offsetLeft;
-          const y = line.offsetTop + ascent;
+          const y = line.offsetTop + halfLeading + fs * 0.8;
           return `<text x="${x}" y="${y}">${escapeXml(line.textContent ?? "")}</text>`;
         })
         .join("");
@@ -89,6 +93,17 @@ export function VideoText({
     }
     return () => ro.disconnect();
   }, [lines]);
+
+  // Force the `muted` DOM property (React only sets the attribute) and kick off
+  // playback — otherwise browsers may block muted autoplay and the video never
+  // renders a frame, leaving only the fallback text.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const p = v.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  }, [mask, reduce, videoFailed]);
 
   const maskStyle = mask
     ? ({
@@ -114,7 +129,7 @@ export function VideoText({
           display: "block",
           fontFamily: "var(--font-anton)",
           fontSize,
-          lineHeight: 0.92,
+          lineHeight: 1.1,
           whiteSpace: "nowrap",
           color: fallbackColor,
         }}
@@ -123,7 +138,7 @@ export function VideoText({
           <span
             key={i}
             data-vt-line
-            style={{ display: "block", marginTop: i === 0 ? 0 : "0.06em" }}
+            style={{ display: "block", marginTop: i === 0 ? 0 : "0.08em" }}
           >
             {line}
           </span>
@@ -133,12 +148,13 @@ export function VideoText({
       {/* Overlay: the shared video, clipped to the letterforms and aligned to the base. */}
       {showVideo && (
         <video
+          ref={videoRef}
           aria-hidden
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={poster}
           onError={() => setVideoFailed(true)}
           className="absolute inset-0 h-full w-full object-cover"
