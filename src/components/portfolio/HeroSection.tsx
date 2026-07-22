@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap, useGSAP, SplitText } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotionClient } from "./useClientHooks";
 import { ArrowDown, MapPin } from "lucide-react";
 import { Magnetic } from "./CursorGlow";
+import { VideoText } from "./VideoText";
 
 export function HeroSection() {
   const reduce = useReducedMotionClient();
@@ -32,43 +33,12 @@ export function HeroSection() {
         const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.9 } });
         tl.from(".hero-meta", { autoAlpha: 0, duration: 1 }, 0)
           .from(".hero-eyebrow", { autoAlpha: 0, y: 14 }, 0.15)
+          .from(".hero-name-video", { autoAlpha: 0, yPercent: 6, duration: 1 }, 0.25)
           .from(".hero-tick", { scaleX: 0, transformOrigin: "left center", duration: 0.8 }, 1.1)
           .from(".hero-signature", { autoAlpha: 0, y: 14 }, 0.6)
           .from(".hero-rolequote > *", { autoAlpha: 0, y: 24, stagger: 0.12 }, 0.75)
           .from(".hero-cta", { autoAlpha: 0, y: 24 }, 0.95)
           .from(".hero-detail", { autoAlpha: 0, duration: 1, stagger: 0.12 }, 1.3);
-
-        // ── Name: SplitText char reveal, deferred until fonts are ready so
-        // Anton doesn't shift the split. Pre-hidden synchronously to avoid a
-        // flash of the un-split name. No mask (would clip Vietnamese diacritics).
-        gsap.set(".hero-name-line", { autoAlpha: 0 });
-        let split: SplitText | undefined;
-        let nameTween: gsap.core.Tween | undefined;
-        let cancelled = false;
-        const buildName = () => {
-          if (cancelled || !sectionRef.current) return;
-          gsap.set(".hero-name-line", { autoAlpha: 1 });
-          split = SplitText.create(sectionRef.current.querySelectorAll(".hero-name-line"), {
-            type: "chars",
-          });
-          nameTween = gsap.from(split.chars, {
-            yPercent: 110,
-            autoAlpha: 0,
-            stagger: 0.025,
-            duration: 0.9,
-            ease: "power4.out",
-            delay: 0.25,
-          });
-        };
-        const fontsReady =
-          typeof document !== "undefined" && document.fonts ? document.fonts.ready : Promise.resolve();
-        fontsReady.then(buildName);
-
-        return () => {
-          cancelled = true;
-          nameTween?.kill();
-          split?.revert();
-        };
       });
 
       return () => mm.revert();
@@ -157,16 +127,16 @@ export function HeroSection() {
 
         {/* Massive name with signature placed as an editorial "kicker" beside it */}
         <h1 className="editorial-title text-offwhite">
-          <span
-            className="hero-name-line block leading-[0.86] mb-8"
-            style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}
-          >
-            NGUYỄN NGỌC
-          </span>
-          <span className="relative block leading-[0.86]">
-            <span className="hero-name-line inline-block" style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}>
-              TƯỜNG VY
-            </span>
+          <span className="relative block">
+            <VideoText
+              className="hero-name-video align-top"
+              lines={["NGUYỄN NGỌC", "TƯỜNG VY"]}
+              mp4Src="/videos/hero-name.mp4"
+              webmSrc="/videos/hero-name.webm"
+              poster="/videos/hero-name-poster.jpg"
+              fontSize="clamp(2rem, 10vw, 8rem)"
+              fallbackColor="var(--color-offwhite)"
+            />
             {/* small teal tick under the name — animated grow-in */}
             <span className="hero-tick absolute -bottom-2 left-0 h-1 w-12 origin-left bg-gradient-to-r from-teal to-teal-bright sm:w-20 lg:w-28" />
           </span>
