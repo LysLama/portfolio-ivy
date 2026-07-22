@@ -89,7 +89,7 @@ export function CaseStudiesSection() {
         {/* Header */}
         <div className="cs-header mb-16 grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <p className="cs-head-line eyebrow mb-3 text-teal">Phần 03 — Case studies</p>
+            <p className="cs-head-line eyebrow mb-3 text-teal">Phần 03 — Project</p>
             <h2 className="editorial-title text-5xl !leading-[1.08] text-offwhite sm:text-7xl lg:text-[6.5rem]">
               <span className="cs-head-line block">Ba dự án</span>
               <span className="cs-head-line block text-slate">Ba bài học</span>
@@ -215,7 +215,9 @@ export function CaseStudiesSection() {
                     <img
                       src={cs.image}
                       alt={cs.imageAlt}
-                      className="h-full w-full object-cover"
+                      className={`h-full w-full ${
+                        cs.imageFit === "contain" ? "object-contain" : "object-cover"
+                      }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-ocean via-ocean/40 to-transparent" />
                     <motion.span

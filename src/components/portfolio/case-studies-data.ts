@@ -9,6 +9,9 @@ export type CaseStudy = {
   year: string;
   image: string;
   imageAlt: string;
+  /** How the expanded-overlay image fits its box. Default "cover". Use
+   *  "contain" for portrait/odd-ratio images that would otherwise be cropped. */
+  imageFit?: "cover" | "contain";
   metrics: { value: string; label: string }[];
   sections: {
     label: string;
@@ -118,6 +121,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     company: "Khởi nghiệp — môn học",
     year: "2025",
     image: "/images/case-studies/inblue.jpg",
+    imageFit: "contain",
     imageAlt:
       "Nhóm InBlue tại booth giới thiệu sản phẩm ở FPT University — minh hoạ demo AI luyện phỏng vấn",
     metrics: [
