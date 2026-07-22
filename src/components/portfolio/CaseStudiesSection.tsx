@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotionClient } from "./useClientHooks";
 import {
   ArrowUpRight,
@@ -15,7 +16,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { CASE_STUDIES } from "./case-studies-data";
-import { Reveal } from "./Reveal";
 import { AnimatedCounter } from "./AnimatedCounter";
 
 const SECTION_ICONS = [FileText, AlertTriangle, Lightbulb, GraduationCap];
@@ -25,9 +25,40 @@ const shortTitle = (t: string) => t.split(" × ")[0].split(":")[0];
 export function CaseStudiesSection() {
   const [openId, setOpenId] = useState<string | null>(null);
   const reduce = useReducedMotionClient();
+  const sectionRef = useRef<HTMLElement>(null);
 
   const openIndex = CASE_STUDIES.findIndex((c) => c.id === openId);
   const cs = openIndex >= 0 ? CASE_STUDIES[openIndex] : null;
+
+  // Scroll-driven reveal for the header lines and card rail. Deliberately does
+  // NOT touch the Framer `layoutId` morph — cards animate on entrance only and
+  // clearProps afterwards so no inline transform is left to skew the FLIP calc.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".cs-head-line", {
+          y: 34,
+          autoAlpha: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: { trigger: ".cs-header", start: "top 82%", once: true },
+        });
+        gsap.from(".cs-card", {
+          y: 44,
+          autoAlpha: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+          clearProps: "all",
+          scrollTrigger: { trigger: ".cs-rail", start: "top 85%", once: true },
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
 
   // Lock body scroll + Esc / arrow-key navigation while a case is open
   useEffect(() => {
@@ -50,21 +81,22 @@ export function CaseStudiesSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="work"
       className="section-anchor relative overflow-hidden border-t border-ocean-line py-24 sm:py-32 lg:py-40"
     >
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="mb-16 grid gap-8 lg:grid-cols-12">
-          <Reveal className="lg:col-span-8">
-            <p className="eyebrow mb-3 text-teal">Phần 03 — Case studies</p>
+        <div className="cs-header mb-16 grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <p className="cs-head-line eyebrow mb-3 text-teal">Phần 03 — Case studies</p>
             <h2 className="editorial-title text-5xl !leading-[1.08] text-offwhite sm:text-7xl lg:text-[6.5rem]">
-              <span className="block">Ba dự án</span>
-              <span className="block text-slate">Ba bài học</span>
-              <span className="block text-teal">Ba con số</span>
+              <span className="cs-head-line block">Ba dự án</span>
+              <span className="cs-head-line block text-slate">Ba bài học</span>
+              <span className="cs-head-line block text-teal">Ba con số</span>
             </h2>
-          </Reveal>
-          <Reveal className="lg:col-span-4 lg:pt-12" delay={0.1}>
+          </div>
+          <div className="cs-head-line lg:col-span-4 lg:pt-12">
             <p className="leading-relaxed text-slate">
               Mình kể lại ba dự án đúng như những gì đã diễn ra — cả những quyết
               định mình tự hào lẫn những phản hồi khiến mình phải làm lại từ đầu.
@@ -73,15 +105,14 @@ export function CaseStudiesSection() {
               <span className="h-px w-6 bg-teal/60" />
               Chạm vào một dự án để đọc chi tiết
             </p>
-          </Reveal>
+          </div>
         </div>
 
         {/* Horizontal card rail */}
-        <Reveal delay={0.15}>
-          <div
-            className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 [scrollbar-width:thin]"
-            role="list"
-          >
+        <div
+          className="cs-rail -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 [scrollbar-width:thin]"
+          role="list"
+        >
             {CASE_STUDIES.map((c, i) => {
               const primaryMetric = c.metrics[c.metrics.length - 1];
               return (
@@ -93,7 +124,7 @@ export function CaseStudiesSection() {
                   whileHover={reduce ? undefined : { y: -8 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   style={reduce ? undefined : { willChange: "transform" }}
-                  className="group relative flex w-[80vw] max-w-[380px] flex-shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-ocean-line bg-ocean-soft text-left transition-colors duration-400 hover:border-teal/55 hover:shadow-[0_24px_60px_-28px_rgba(46,196,182,0.45)] sm:w-[46vw] lg:w-[calc((100%-2.5rem)/3)]"
+                  className="cs-card group relative flex w-[80vw] max-w-[380px] flex-shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-ocean-line bg-ocean-soft text-left transition-colors duration-400 hover:border-teal/55 hover:shadow-[0_24px_60px_-28px_rgba(46,196,182,0.45)] sm:w-[46vw] lg:w-[calc((100%-2.5rem)/3)]"
                   aria-label={`Mở chi tiết dự án ${shortTitle(c.title)}`}
                 >
                   {/* Image */}
@@ -151,8 +182,7 @@ export function CaseStudiesSection() {
                 </motion.button>
               );
             })}
-          </div>
-        </Reveal>
+        </div>
       </div>
 
       {/* Expanded detail overlay — morphs from the clicked card */}
