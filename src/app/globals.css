@@ -156,6 +156,24 @@
   box-decoration-break: clone;
 }
 
+/* Typewriter caret — zero-width so it never shifts the text it rides along */
+.typing-caret {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  vertical-align: baseline;
+}
+.typing-caret::after {
+  content: "";
+  position: absolute;
+  left: 0.06em;
+  bottom: -0.12em;
+  width: 2px;
+  height: 1em;
+  border-radius: 1px;
+  background: var(--color-teal);
+}
+
 /* Hairline divider */
 .hairline {
   height: 1px;

@@ -7,6 +7,7 @@ import { useReducedMotionClient } from "./useClientHooks";
 import { ArrowDown, MapPin } from "lucide-react";
 import { Magnetic } from "./CursorGlow";
 import { VideoText } from "./VideoText";
+import { TypingText } from "./TypingText";
 
 export function HeroSection() {
   const reduce = useReducedMotionClient();
@@ -164,13 +165,20 @@ export function HeroSection() {
 
           <div className="lg:col-span-7 lg:col-start-6">
             <p className="eyebrow mb-4 text-slate-dim">Quan điểm</p>
-            <p className="text-lg leading-relaxed text-offwhite sm:text-xl lg:text-2xl">
-              &ldquo;Mình tin một ý tưởng chỉ thuyết phục khi nó đứng trên một{" "}
-              <span className="accent-underline font-medium text-offwhite">
-                sự thật được đọc đúng
-              </span>{" "}
-              — và data là cách mình đi tìm sự thật đó.&rdquo;
-            </p>
+            {/* startDelay picks up where the intro timeline leaves off:
+                .hero-rolequote fades in at 0.75s over 0.9s → settled at ~1.65s. */}
+            <TypingText
+              className="text-lg leading-relaxed text-offwhite sm:text-xl lg:text-2xl"
+              startDelay={1650}
+              segments={[
+                { text: "“Mình tin một ý tưởng chỉ thuyết phục khi nó đứng trên một " },
+                {
+                  text: "sự thật được đọc đúng",
+                  className: "accent-underline font-medium text-offwhite",
+                },
+                { text: " — và data là cách mình đi tìm sự thật đó.”" },
+              ]}
+            />
           </div>
         </div>
 
