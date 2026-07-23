@@ -38,8 +38,17 @@ const inter = Inter({
   display: "swap",
 });
 
+// Absolute URLs for OG/Twitter images. Vercel injects the production domain,
+// so this resolves correctly on deploy without hard-coding it; override with
+// NEXT_PUBLIC_SITE_URL once a custom domain is attached.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vy-nguyen-portfolio.local"),
+  metadataBase: new URL(siteUrl),
   title: "Nguyễn Ngọc Tường Vy — Fresher Planner",
   description:
     "Portfolio của Nguyễn Ngọc Tường Vy — Fresher Strategic Planner. Một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng.",
