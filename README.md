@@ -1,6 +1,6 @@
 # Portfolio — Nguyễn Ngọc Tường Vy
 
-Website portfolio một trang (single-page) cho **Nguyễn Ngọc Tường Vy — Junior Strategic Planner**.
+Website portfolio một trang (single-page) cho **Nguyễn Ngọc Tường Vy — Fresher Strategic Planner**.
 Giao diện editorial tối (dark), nhiều hiệu ứng cuộn/chuyển động, tối ưu SEO & Open Graph, hỗ trợ tiếng Việt.
 
 > *"Một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng. Data là cách mình đi tìm sự thật đó."*

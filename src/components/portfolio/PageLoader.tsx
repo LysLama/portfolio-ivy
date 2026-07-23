@@ -93,7 +93,7 @@ export function PageLoader() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="mb-10 text-[0.6rem] uppercase tracking-[0.3em] text-slate-dim"
           >
-            Junior Planner · Portfolio
+            Fresher Planner · Portfolio
           </motion.p>
 
           {/* Progress bar */}

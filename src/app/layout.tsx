@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vy-nguyen-portfolio.local"),
   title: "Nguyễn Ngọc Tường Vy — Fresher Planner",
   description:
-    "Portfolio của Nguyễn Ngọc Tường Vy — Junior Strategic Planner. Một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng.",
+    "Portfolio của Nguyễn Ngọc Tường Vy — Fresher Strategic Planner. Một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng.",
   keywords: [
     "Nguyễn Ngọc Tường Vy",
     "Strategic Planner",
-    "Junior Planner",
+    "Fresher Planner",
     "Planning Intern",
     "FPT Online",
     "Portfolio",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Nguyễn Ngọc Tường Vy" }],
   creator: "Nguyễn Ngọc Tường Vy",
   openGraph: {
-    title: "Nguyễn Ngọc Tường Vy — Junior Strategic Planner",
+    title: "Nguyễn Ngọc Tường Vy — Fresher Strategic Planner",
     description:
       "Portfolio — một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng. Data là cách mình đi tìm sự thật đó.",
     type: "website",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Nguyễn Ngọc Tường Vy — Junior Strategic Planner Portfolio",
+        alt: "Nguyễn Ngọc Tường Vy — Fresher Strategic Planner Portfolio",
       },
     ],
   },
@@ -76,9 +76,6 @@ export const metadata: Metadata = {
     description:
       "Portfolio — một planner tin rằng ý tưởng chỉ thuyết phục khi đứng trên sự thật được đọc đúng.",
     images: ["/og-image.png"],
-  },
-  icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
 };
 
